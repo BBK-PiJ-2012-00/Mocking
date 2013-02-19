@@ -14,7 +14,7 @@ public class CounterTest {
 		Counter count = new Counter();
 		
 		Counter mockedCounter = mock(Counter.class); //This tells Mockito to create a class of type mock
-		when(mockedCounter.getValue()).thenReturn(1).thenReturn(2).thenReturn(3); //This tells Mockito that when getValue() is called the first 
+		when(mockedCounter.getValue()).thenReturn(1).thenReturn(2).thenReturn(3).thenReturn(4); //This tells Mockito that when getValue() is called the first 
 		//time it should return 1, then 2 etc
 		
 		first = count.getValue();
@@ -25,14 +25,19 @@ public class CounterTest {
 		first = count.getValue();
 		mockedFirst = mockedCounter.getValue();
 		
-		assertEquals("Wronge Answer !",first , mockedFirst);
+		assertEquals("Wrong Answer !", first, mockedFirst);
 		
 		first = count.getValue();
 		mockedFirst = mockedCounter.getValue();
 		
-		verify(mockedCounter,atMost(4)).getValue(); //This tells Mockito to check that ‘getValue’ has been called at least 4 times
+		assertEquals("Wrong Answer !", first, mockedFirst);
 		
-		assertEquals("Wronge Answer !",first , mockedFirst);
+		first = count.getValue();
+		mockedFirst = mockedCounter.getValue();
+		
+		assertEquals("Wrong Answer!", first, mockedFirst);
+		
+		verify(mockedCounter,atLeast(4)).getValue(); //This tells Mockito to check that ‘getValue’ has been called at least 4 times
 	}
 
 }
