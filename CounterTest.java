@@ -79,6 +79,27 @@ public class CounterTest {
 		
 		verify(mockedCounter,never()).getValue(); //This tells Mockito to check that ‘getValue’ has been called at least 4 times
 	}
+	
+	
+	@Test
+	public void test4() {
+		
+		Integer first, mockedFirst;
+		Integer expectedFirst = 1;
+		Counter count = new Counter();
+		
+		Counter mockedCounter = mock(Counter.class); //This tells Mockito to create a class of type mock
+		when(mockedCounter.getValue()).thenReturn(1); //This tells Mockito that when getValue() is called the first 
+		//time it should return 1, then 2 etc		
+		
+		first = count.getValue(); //This won't satisfy atLeastOnce() because count is calling the method, not mockedCounter -> we want to verify
+		//that mockedCounter's method getValue() is called.
+		
+		mockedFirst = mockedCounter.getValue();
+		
+		verify(mockedCounter, atLeastOnce()).getValue(); //This tells Mockito to check that ‘getValue’ has been called at least 4 times
+	}
+		
 		
 }
 	
